@@ -1,0 +1,7 @@
+Para iniciar o servidor:
+nodejs server
+
+Imagens:
+http://www.fundosanimais.com/Minis/leoes.jpg
+http://www.fundosanimais.com/Minis/girafa.jpg
+http://www.fundosanimais.com/Minis/aguia-asas-abertas.jpg
