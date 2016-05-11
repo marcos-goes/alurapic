@@ -1,5 +1,5 @@
 angular.module('alurapic')
-.controller('FotoController', function($scope, $routeParams, recursoFoto){
+.controller('FotoController', function($scope, $routeParams, recursoFoto, cadastroDeFotos){
 
     var self = this;
 
@@ -28,50 +28,17 @@ angular.module('alurapic')
 
     self.submeter = function() {
       if($scope.formulario.$valid) {
-        if(self.foto._id){
-          recursoFoto.update({fotoId : self.foto._id}, self.foto, function(){
-            self.foto = {};
-            self.mensagem = 'Foto alterada com sucesso!';
-          }, function(erro){
-            self.mensagem = 'Não foi possível alterar a foto [' + self.foto.titulo + '].';
-            console.log(erro);
-          });
 
-          /*
-          $http.put('v1/fotos/' + self.foto._id, self.foto)
-          .success(function(){
-            self.foto = {};
-            self.mensagem = 'Foto alterada com sucesso!';
-          })
-          .error(function(erro){
-            self.mensagem = 'Não foi possível alterar a foto [' + self.foto.titulo + '].';
-            console.log(erro);
-          });
-          */
-
-        }else{
-          recursoFoto.save(self.foto, function(){
-            self.foto = {};
-            self.mensagem = 'Foto inserida com sucesso!';
-          }, function(erro){
-            self.mensagem = 'Não foi possível inserir a foto.';
-            console.log(erro);
-          });
-          /*
-          $http.post('v1/fotos', self.foto)
-          .success(function(){
-            self.foto = {};
-            self.mensagem = 'Foto inserida com sucesso!';
-          })
-          .error(function(erro){
-            self.mensagem = 'Não foi possível inserir a foto.';
-            console.log(erro);
-          });
-          */
-        }
-
-
-
+         cadastroDeFotos.cadastrar(self.foto)
+         .then(function(dados){
+            self.mensagem = dados.mensagem;
+            if(dados.inclusao){
+               self.foto = {};
+            }
+         })
+         .catch(function(dados){
+            self.mensagem = dados.mensagem;
+         })
       }
     };
 
