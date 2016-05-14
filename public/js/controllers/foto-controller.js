@@ -32,9 +32,7 @@ angular.module('alurapic')
          cadastroDeFotos.cadastrar(self.foto)
          .then(function(dados){
             self.mensagem = dados.mensagem;
-            if(dados.inclusao){
-               self.foto = {};
-            }
+            if(dados.inclusao) self.foto = {};
          })
          .catch(function(dados){
             self.mensagem = dados.mensagem;
